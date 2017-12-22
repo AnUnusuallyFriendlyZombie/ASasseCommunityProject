@@ -9,10 +9,8 @@ import javax.imageio.ImageIO;
 
 public final class CommunityProject {
 
-
 	private static final Window window = new Window(800, 600, "Game");
 	private static BufferedImage image;
-
 
 	private CommunityProject() {
 
@@ -53,8 +51,12 @@ public final class CommunityProject {
 
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, window.width, window.height);
-		g.drawImage(image, 0, 0, 64, 64, null);
 
+		final int scale = 64;
+
+		for (int y = 0; y < 5; y++)
+			for (int x = 0; x < 5; x++)
+				g.drawImage(image, x * scale, y * scale, scale, scale, null);
 
 	}
 }
