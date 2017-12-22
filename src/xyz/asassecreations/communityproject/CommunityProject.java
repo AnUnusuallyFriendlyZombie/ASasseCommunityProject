@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 
 public final class CommunityProject {
 
-	private static final Window window = new Window(1280, 720, "Game");
+	private static final Window window = new Window(800, 600, "Game");
 
 	private CommunityProject() {
 
