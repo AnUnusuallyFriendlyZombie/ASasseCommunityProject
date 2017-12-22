@@ -34,8 +34,12 @@ public final class CommunityProject {
 
 	public static final void render(final Graphics2D g) {
 
-		g.setColor(Color.BLACK);
+		g.setColor(Color.PINK);
 		g.fillRect(0, 0, window.width, window.height);
 
+		
+		
+		g.setColor(Color.BLACK);
+		g.fillRoundRect(57, 79, 500, 176, 32, 32);
 	}
 }
