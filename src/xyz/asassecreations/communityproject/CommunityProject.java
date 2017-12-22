@@ -51,16 +51,9 @@ public final class CommunityProject {
 
 	public static final void render(final Graphics2D g) {
 
-		g.setColor(Color.PINK);
-		g.fillRect(0, 0, window.width, window.height);
-
-
-		
-		
 		g.setColor(Color.BLACK);
-		g.fillRoundRect(57, 79, 500, 176, 32, 32);
-
-		g.drawImage(image, 0, 0, 32, 32, null);
+		g.fillRect(0, 0, window.width, window.height);
+		g.drawImage(image, 0, 0, 64, 64, null);
 
 
 	}
