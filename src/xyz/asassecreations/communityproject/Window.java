@@ -3,6 +3,8 @@ package xyz.asassecreations.communityproject;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
@@ -26,7 +28,7 @@ public final class Window {
 		canvas.setMaximumSize(dim);
 		canvas.setPreferredSize(dim);
 
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setLayout(new BorderLayout());
 		frame.add(canvas, BorderLayout.CENTER);
@@ -35,6 +37,40 @@ public final class Window {
 		frame.setVisible(true);
 		canvas.createBufferStrategy(3);
 		bs = canvas.getBufferStrategy();
+
+		frame.addWindowListener(new WindowListener() {
+
+			public final void windowOpened(final WindowEvent e) {
+
+			}
+
+			public final void windowIconified(final WindowEvent e) {
+
+			}
+
+			public final void windowDeiconified(final WindowEvent e) {
+
+			}
+
+			public final void windowDeactivated(final WindowEvent e) {
+
+			}
+
+			public final void windowClosing(final WindowEvent e) {
+
+				CommunityProject.stop();
+
+			}
+
+			public final void windowClosed(final WindowEvent e) {
+
+			}
+
+			public final void windowActivated(final WindowEvent e) {
+
+			}
+
+		});
 
 	}
 
