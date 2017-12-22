@@ -17,6 +17,7 @@ public final class TestState extends State {
 		try {
 
 			image = ImageIO.read(Class.class.getResourceAsStream("/grass.png"));
+			image.flush();
 
 		} catch (final IOException e) {
 
