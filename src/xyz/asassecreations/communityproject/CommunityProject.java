@@ -3,7 +3,10 @@ package xyz.asassecreations.communityproject;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import xyz.asassecreations.communityproject.state.StateManager;
+import xyz.asassecreations.communityproject.engine.Timings;
+import xyz.asassecreations.communityproject.engine.Window;
+import xyz.asassecreations.communityproject.engine.state.StateManager;
+import xyz.asassecreations.communityproject.state.TestState;
 
 public final class CommunityProject {
 

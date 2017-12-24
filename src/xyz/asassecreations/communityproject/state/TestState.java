@@ -1,12 +1,10 @@
-package xyz.asassecreations.communityproject;
+package xyz.asassecreations.communityproject.state;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
-
-import xyz.asassecreations.communityproject.state.State;
+import xyz.asassecreations.communityproject.engine.Util;
+import xyz.asassecreations.communityproject.engine.state.State;
 
 public final class TestState extends State {
 
@@ -14,16 +12,8 @@ public final class TestState extends State {
 
 	public final void init() {
 
-		try {
-
-			image = ImageIO.read(Class.class.getResourceAsStream("/gfx/grass.png"));
-			image.flush();
-
-		} catch (final IOException e) {
-
-			e.printStackTrace();
-
-		}
+		image = Util.getImage("/gfx/grass.png");
+		if (image == null) System.err.println("Failed to load grass texture.");
 
 	}
 
