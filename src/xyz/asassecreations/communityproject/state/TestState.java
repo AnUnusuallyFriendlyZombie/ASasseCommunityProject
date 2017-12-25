@@ -9,6 +9,7 @@ import xyz.asassecreations.communityproject.CommunityProject;
 import xyz.asassecreations.communityproject.engine.Input;
 import xyz.asassecreations.communityproject.engine.Timings;
 import xyz.asassecreations.communityproject.engine.Util;
+import xyz.asassecreations.communityproject.engine.math.vector.Vec2;
 import xyz.asassecreations.communityproject.engine.state.State;
 
 public final class TestState extends State {
@@ -18,7 +19,7 @@ public final class TestState extends State {
 	private final int mapWidth = 1000;
 	private final int mapHeight = 1000;
 	private final int[] tilemap = new int[mapWidth * mapHeight];
-	private float cx = 0, cy = 0;
+	private final Vec2 camera = new Vec2();
 
 	public final void init() {
 
@@ -29,19 +30,16 @@ public final class TestState extends State {
 
 	public final void input() {
 
-		float vx = 0;
-		float vy = 0;
+		final Vec2 dir = new Vec2();
 
-		if (Input.kc[KeyEvent.VK_W]) vy--;
-		if (Input.kc[KeyEvent.VK_S]) vy++;
-		if (Input.kc[KeyEvent.VK_A]) vx--;
-		if (Input.kc[KeyEvent.VK_D]) vx++;
+		if (Input.kc[KeyEvent.VK_W]) dir.y--;
+		if (Input.kc[KeyEvent.VK_S]) dir.y++;
+		if (Input.kc[KeyEvent.VK_A]) dir.x--;
+		if (Input.kc[KeyEvent.VK_D]) dir.x++;
 
-		vx *= 100f;
-		vy *= 100f;
+		if (dir.magnitudeSquared() != 0f) dir.normalise();
 
-		cx += vx * Timings.delta_f;
-		cy += vy * Timings.delta_f;
+		camera.add(dir.mul(100f).mul(Timings.delta_f));
 
 	}
 
@@ -55,14 +53,14 @@ public final class TestState extends State {
 
 		for (int y = 0; y < mapHeight; y++) {
 
-			final int yy = y * scale - (int) cy;
+			final int yy = y * scale - (int) camera.y;
 
 			if (yy > CommunityProject.WINDOW.height) break;
 			if (yy < -scale) continue;
 
 			for (int x = 0; x < mapWidth; x++) {
 
-				final int xx = x * scale - (int) cx;
+				final int xx = x * scale - (int) camera.x;
 
 				if (xx > CommunityProject.WINDOW.width) break;
 				if (xx < -scale) continue;
@@ -86,8 +84,8 @@ public final class TestState extends State {
 			g.drawString("Frames: " + Timings.frames, x, y += vy);
 			g.drawString("Globaltime: " + Timings.globalTime, x, y += vy);
 			g.drawString("Sleep: " + Timings.sleep, x, y += vy);
-			g.drawString("Camera X: " + cx, x, y += vy);
-			g.drawString("Camera Y: " + cy, x, y += vy);
+			g.drawString("Camera X: " + camera.x, x, y += vy);
+			g.drawString("Camera Y: " + camera.y, x, y += vy);
 
 		}
 
