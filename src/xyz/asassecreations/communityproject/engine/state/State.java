@@ -1,7 +1,5 @@
 package xyz.asassecreations.communityproject.engine.state;
 
-import java.awt.Graphics2D;
-
 public abstract class State {
 
 	protected StateManager manager;
@@ -18,7 +16,7 @@ public abstract class State {
 
 	public abstract void tick();
 
-	public abstract void render(Graphics2D g);
+	public abstract void render();
 
 	public abstract void destroy();
 

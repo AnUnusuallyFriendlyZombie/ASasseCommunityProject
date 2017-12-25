@@ -1,11 +1,11 @@
 package xyz.asassecreations.communityproject;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 
 import javax.swing.JOptionPane;
 
 import xyz.asassecreations.communityproject.editor.EditorState;
+import xyz.asassecreations.communityproject.engine.Renderer;
 import xyz.asassecreations.communityproject.engine.Timings;
 import xyz.asassecreations.communityproject.engine.Window;
 import xyz.asassecreations.communityproject.engine.state.StateManager;
@@ -68,11 +68,14 @@ public final class CommunityProject {
 				do {
 
 					final Graphics2D g = (Graphics2D) WINDOW.bs.getDrawGraphics();
+					Renderer.g = g;
+					Renderer.width = WINDOW.width;
+					Renderer.height = WINDOW.height;
+					Renderer.begin();
 
-					g.setColor(Color.BLACK);
-					g.fillRect(0, 0, WINDOW.width, WINDOW.height);
+					Renderer.clear();
 
-					manager.render(g);
+					manager.render();
 
 					g.dispose();
 

@@ -1,6 +1,5 @@
 package xyz.asassecreations.communityproject.engine.state;
 
-import java.awt.Graphics2D;
 import java.util.Stack;
 
 public final class StateManager {
@@ -44,9 +43,9 @@ public final class StateManager {
 
 	}
 
-	public final void render(final Graphics2D g) {
+	public final void render() {
 
-		if (peek() != null) peek().render(g);
+		if (peek() != null) peek().render();
 
 	}
 
