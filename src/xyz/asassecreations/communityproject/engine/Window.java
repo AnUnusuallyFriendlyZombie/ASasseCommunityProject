@@ -3,6 +3,11 @@ package xyz.asassecreations.communityproject.engine;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.image.BufferStrategy;
@@ -69,6 +74,72 @@ public final class Window {
 			}
 
 			public final void windowActivated(final WindowEvent e) {
+
+			}
+
+		});
+
+		canvas.addKeyListener(new KeyListener() {
+
+			public final void keyTyped(final KeyEvent e) {
+
+			}
+
+			public final void keyReleased(final KeyEvent e) {
+
+				Input.kc[e.getKeyCode()] = false;
+
+			}
+
+			public final void keyPressed(final KeyEvent e) {
+
+				Input.kc[e.getKeyCode()] = true;
+
+			}
+
+		});
+
+		canvas.addMouseListener(new MouseListener() {
+
+			public final void mouseReleased(final MouseEvent e) {
+
+				Input.mc[e.getButton()] = false;
+
+			}
+
+			public final void mousePressed(final MouseEvent e) {
+
+				Input.mc[e.getButton()] = true;
+
+			}
+
+			public final void mouseExited(final MouseEvent e) {
+
+			}
+
+			public final void mouseEntered(final MouseEvent e) {
+
+			}
+
+			public final void mouseClicked(final MouseEvent e) {
+
+			}
+
+		});
+
+		canvas.addMouseMotionListener(new MouseMotionListener() {
+
+			public final void mouseMoved(final MouseEvent e) {
+
+				Input.mxc = e.getX();
+				Input.myc = e.getY();
+
+			}
+
+			public final void mouseDragged(final MouseEvent e) {
+
+				Input.mxc = e.getX();
+				Input.myc = e.getY();
 
 			}
 
