@@ -1,5 +1,6 @@
 package xyz.asassecreations.communityproject.state;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -69,6 +70,24 @@ public final class TestState extends State {
 				g.drawImage(image, xx, yy, scale, scale, null);
 
 			}
+
+		}
+
+		{
+
+			g.setColor(Color.WHITE);
+
+			final int vy = 15;
+			final int x = 5;
+			int y = 0;
+
+			g.drawString("Delta: " + Timings.delta, x, y += vy);
+			g.drawString("FPS: " + Timings.fps, x, y += vy);
+			g.drawString("Frames: " + Timings.frames, x, y += vy);
+			g.drawString("Globaltime: " + Timings.globalTime, x, y += vy);
+			g.drawString("Sleep: " + Timings.sleep, x, y += vy);
+			g.drawString("Camera X: " + cx, x, y += vy);
+			g.drawString("Camera Y: " + cy, x, y += vy);
 
 		}
 
