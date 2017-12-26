@@ -14,17 +14,44 @@ import xyz.asassecreations.communityproject.engine.state.State;
 
 public final class TestState extends State {
 
-	private BufferedImage image;
+	private BufferedImage grassTexture, sandTexture;
 
-	private final int mapWidth = 1000;
-	private final int mapHeight = 1000;
-	private final int[] tilemap = new int[mapWidth * mapHeight];
+	private int mapWidth;
+	private int mapHeight;
+	private int[] tilemap;
 	private final Vec2 camera = new Vec2();
 
 	public final void init() {
 
-		image = Util.getImage("/gfx/grass.png");
-		if (image == null) System.err.println("Failed to load grass texture.");
+		grassTexture = Util.getImage("/gfx/grass.png");
+		if (grassTexture == null) System.err.println("Failed to load grass texture.");
+
+		sandTexture = Util.getImage("/gfx/sand.png");
+		if (sandTexture == null) System.err.println("Failed to load sand texture.");
+
+		final BufferedImage stage = Util.getImage("/stage.png");
+		if (stage == null) {
+			System.err.println("Failed to stage texture.");
+			return;
+		}
+
+		mapWidth = stage.getWidth();
+		mapHeight = stage.getHeight();
+		tilemap = new int[mapWidth * mapHeight];
+
+		for (int y = 0; y < mapHeight; y++)
+			for (int x = 0; x < mapWidth; x++) {
+
+				final int pixel = stage.getRGB(x, y) & 0x00FFFFFF;
+				final int red = (pixel & 0xFF0000) >> 16;
+				final int green = (pixel & 0xFF00) >> 8;
+				final int blue = pixel & 0xFF;
+
+				if (red == 0 && green == 255 && blue == 0) tilemap[x + y * mapWidth] = 0;
+				else if (red == 255 && green == 255 && blue == 0) tilemap[x + y * mapWidth] = 1;
+				else tilemap[x + y * mapWidth] = -1;
+
+			}
 
 	}
 
@@ -39,7 +66,7 @@ public final class TestState extends State {
 
 		if (dir.magnitudeSquared() != 0f) dir.normalise();
 
-		camera.add(dir.mul(100f).mul(Timings.delta_f));
+		camera.add(dir.mul(500f).mul(Timings.delta_f));
 
 	}
 
@@ -65,7 +92,14 @@ public final class TestState extends State {
 				if (xx > CommunityProject.WINDOW.width) break;
 				if (xx < -scale) continue;
 
-				Renderer.g.drawImage(image, xx, yy, scale, scale, null);
+				final int id = tilemap[x + y * mapWidth];
+				if (id == -1) continue;
+
+				BufferedImage image = null;
+				if (id == 0) image = grassTexture;
+				if (id == 1) image = sandTexture;
+
+				Renderer.drawImage(image, xx, yy, scale, scale);
 
 			}
 
